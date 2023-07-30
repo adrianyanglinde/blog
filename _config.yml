@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: adrianyang.pro@gmail.com
 description: ""
 keyword: ""
-url: "http://huangxuan.me" # your host, for absolute URL
+url: "https://adrianyanglinde.github.io" # your host, for absolute URL
 baseurl: "/blog" # for example, '/blog' if your blog hosted on 'host/blog'
 
 # SNS settings
