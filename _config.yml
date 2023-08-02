@@ -1,6 +1,6 @@
 # Site settings
-title: Yang's Blog
-SEOTitle: 杨林德的博客 | Yang's Blog
+title: Adrian's Blog
+SEOTitle: 杨林德的博客 | Adrian's Blog
 header-img: img/home-bg.jpg
 email: adrianyang.pro@gmail.com
 description: ""
@@ -63,7 +63,7 @@ featured-condition-size: 1 # A tag will be featured if the size of it is more th
 # Friends
 friends:
     [
-        { title: "Hux Blog", href: "http://huangxuan.me" },
+        { title: "Adrian", href: "https://adrianyanglinde.github.io/blog" },
         { title: "Foo", href: "#" },
         { title: "Bar", href: "#" },
         { title: "Example Friends", href: "#" },

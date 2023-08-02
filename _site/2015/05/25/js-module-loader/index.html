@@ -10,7 +10,7 @@
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/blog/img/favicon.ico">
 
-    <title>Example Post with Code Highlight - 杨林德的博客 | Yang's Blog</title>
+    <title>Example Post with Code Highlight - 杨林德的博客 | Adrian's Blog</title>
 
     <link rel="canonical" href="http://localhost:4000/blog/2015/05/25/js-module-loader/">
 
@@ -62,7 +62,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/blog/">Yang's Blog</a>
+            <a class="navbar-brand" href="/blog/">Adrian's Blog</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -150,7 +150,7 @@
                     
                     <h2 class="subheading">CommonJS，RequireJS，SeaJS 归纳笔记</h2>
                     
-                    <span class="meta">Posted by Hux on May 25, 2015</span>
+                    <span class="meta">Posted by Adrian on May 25, 2015</span>
                 </div>
             </div>
         </div>
@@ -206,12 +206,13 @@
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 由于 Node 原生支持模块的作用域，并不需要额外的 wrapper</span>
 <span class="c1">// "as though the module was wrapped in a function"</span>
 
-<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./a</span><span class="dl">'</span><span class="p">)</span>  <span class="c1">// 加载模块（同步加载）</span>
-<span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">()</span>         <span class="c1">// 等上一句执行完才会执行</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./a</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// 加载模块（同步加载）</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span> <span class="c1">// 等上一句执行完才会执行</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="c1">// 暴露 b 函数接口</span>
-  <span class="c1">// do something</span>
-<span class="p">}</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// 暴露 b 函数接口</span>
+	<span class="c1">// do something</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">exports</code>是一个内置对象，就像<code class="language-plaintext highlighter-rouge">require</code>是一个内置加载函数一样。如果你希望直接赋值一个完整的对象或者构造函数，覆写<code class="language-plaintext highlighter-rouge">module.exports</code>就可以了。</p>
@@ -243,7 +244,7 @@
 
 <p>09-10 年间，CommonJS（那时还叫 ServerJS） 社区推出 <a href="http://wiki.commonjs.org/wiki/Modules">Modules/1.0</a> 规范，并且在 Node.js 等环境下取得了很不错的实践。</p>
 
-<p>09年下半年这帮充满干劲的小伙子们想把 ServerJS 的成功经验进一步推广到浏览器端，于是将社区改名叫 CommonJS，同时激烈争论 Modules 的下一版规范。分歧和冲突由此诞生，逐步形成了三大流派：</p>
+<p>09 年下半年这帮充满干劲的小伙子们想把 ServerJS 的成功经验进一步推广到浏览器端，于是将社区改名叫 CommonJS，同时激烈争论 Modules 的下一版规范。分歧和冲突由此诞生，逐步形成了三大流派：</p>
 
 <ol>
   <li><strong>Modules/1.x</strong> 流派。这个观点觉得 1.x 规范已经够用，只要移植到浏览器端就好。要做的是新增 <a href="http://wiki.commonjs.org/wiki/Modules/Transport">Modules/Transport</a> 规范，即在浏览器上运行前，先通过转换工具将模块转换为符合 Transport 规范的代码。主流代表是服务端的开发人员。现在值得关注的有两个实现：越来越火的 component 和走在前沿的 es6 module transpiler。</li>
@@ -267,15 +268,16 @@
 
 <span class="kd">var</span> <span class="nx">Employee</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">types/Employee</span><span class="dl">"</span><span class="p">);</span>
 
-<span class="kd">function</span> <span class="nx">Programmer</span> <span class="p">(){</span>
-    <span class="c1">//do something</span>
-<span class="p">}</span>  
+<span class="kd">function</span> <span class="nx">Programmer</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">//do something</span>
+<span class="p">}</span>
 
 <span class="nx">Programmer</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Employee</span><span class="p">();</span>
 
 <span class="c1">//如果 require call 是异步的，那么肯定 error</span>
 <span class="c1">//因为在执行这句前 Employee 模块肯定来不及加载进来</span>
 </code></pre></div></div>
+
 <blockquote>
   <p>As the comment indicates above, if require() is async, this code will not work. However, loading scripts synchronously in the browser kills performance. So, what to do?</p>
 </blockquote>
@@ -284,36 +286,35 @@
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//AMD Wrapper</span>
 
-<span class="nx">define</span><span class="p">(</span>
-    <span class="p">[</span><span class="nx">types</span><span class="o">/</span><span class="nx">Employee</span><span class="p">],</span>    <span class="c1">//依赖</span>
-    <span class="kd">function</span><span class="p">(</span><span class="nx">Employee</span><span class="p">){</span>  <span class="c1">//这个回调会在所有依赖都被加载后才执行</span>
+<span class="nx">define</span><span class="p">([</span><span class="nx">types</span> <span class="o">/</span> <span class="nx">Employee</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Employee</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//依赖</span>
+	<span class="c1">//这个回调会在所有依赖都被加载后才执行</span>
 
-        <span class="kd">function</span> <span class="nx">Programmer</span><span class="p">(){</span>
-            <span class="c1">//do something</span>
-        <span class="p">};</span>
+	<span class="kd">function</span> <span class="nx">Programmer</span><span class="p">()</span> <span class="p">{</span>
+		<span class="c1">//do something</span>
+	<span class="p">}</span>
 
-        <span class="nx">Programmer</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Employee</span><span class="p">();</span>
-        <span class="k">return</span> <span class="nx">Programmer</span><span class="p">;</span>  <span class="c1">//return Constructor</span>
-    <span class="p">}</span>
-<span class="p">)</span>
+	<span class="nx">Programmer</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Employee</span><span class="p">();</span>
+	<span class="k">return</span> <span class="nx">Programmer</span><span class="p">;</span> <span class="c1">//return Constructor</span>
+<span class="p">});</span>
 </code></pre></div></div>
 
 <p>当依赖模块非常多时，这种<strong>依赖前置</strong>的写法会显得有点奇怪，所以 AMD 给了一个语法糖， <strong>simplified CommonJS wrapping</strong>，借鉴了 CommonJS 的 require 就近风格，也更方便对 CommonJS 模块的兼容：</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">dependency1</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">dependency1</span><span class="dl">'</span><span class="p">),</span>
-        <span class="nx">dependency2</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">dependency2</span><span class="dl">'</span><span class="p">);</span>
+	<span class="kd">var</span> <span class="nx">dependency1</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">dependency1</span><span class="dl">"</span><span class="p">),</span>
+		<span class="nx">dependency2</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">dependency2</span><span class="dl">"</span><span class="p">);</span>
 
-    <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
+	<span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
 <span class="p">});</span>
 </code></pre></div></div>
+
 <p>The AMD loader will parse out the <code class="language-plaintext highlighter-rouge">require('')</code> calls by using <code class="language-plaintext highlighter-rouge">Function.prototype.toString()</code>, then internally convert the above define call into this:</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">([</span><span class="dl">'</span><span class="s1">require</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dependency1</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dependency2</span><span class="dl">'</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">dependency1</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">dependency1</span><span class="dl">'</span><span class="p">),</span>
-        <span class="nx">dependency2</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">dependency2</span><span class="dl">'</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">([</span><span class="dl">"</span><span class="s2">require</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">dependency1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">dependency2</span><span class="dl">"</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">dependency1</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">dependency1</span><span class="dl">"</span><span class="p">),</span>
+		<span class="nx">dependency2</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">dependency2</span><span class="dl">"</span><span class="p">);</span>
 
-    <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
+	<span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
@@ -325,7 +326,7 @@
 
 <p>Modules/1.0:</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./a</span><span class="dl">"</span><span class="p">)</span> <span class="c1">// 执行到此时，a.js 才同步下载并执行</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./a</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// 执行到此时，a.js 才同步下载并执行</span>
 </code></pre></div></div>
 
 <p>AMD: （使用 require 的语法糖时）</p>
@@ -345,11 +346,11 @@
 
 <p>AMD 推荐的风格并不使用<code class="language-plaintext highlighter-rouge">require</code>，而是通过参数传入，破坏了<strong>依赖就近</strong>：</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">([</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">c</span><span class="dl">"</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">){</span>
-    <span class="c1">// 提前申明了并初始化了所有模块</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">([</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">c</span><span class="dl">"</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// 提前申明了并初始化了所有模块</span>
 
-    <span class="kc">true</span> <span class="o">||</span> <span class="nx">b</span><span class="p">.</span><span class="nx">foo</span><span class="p">();</span> <span class="c1">//即便根本没用到模块 b，但 b 还是提前执行了。</span>
-<span class="p">})</span>
+	<span class="kc">true</span> <span class="o">||</span> <span class="nx">b</span><span class="p">.</span><span class="nx">foo</span><span class="p">();</span> <span class="c1">//即便根本没用到模块 b，但 b 还是提前执行了。</span>
+<span class="p">});</span>
 </code></pre></div></div>
 
 <p>不过，在笔者看来，风格喜好因人而异，主要还是<strong>预执行</strong>和<strong>懒执行</strong>的差异。</p>
@@ -357,10 +358,10 @@
 <p>另外，require 2.0 也开始思考异步处理<strong>软依赖</strong>（区别于一定需要的<strong>硬依赖</strong>）的问题，提出了这样的方案：</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 函数体内：</span>
-<span class="k">if</span><span class="p">(</span><span class="nx">status</span><span class="p">){</span>
-    <span class="k">async</span><span class="p">([</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span>
-        <span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">()</span>
-    <span class="p">})</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">async</span><span class="p">([</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
+	<span class="p">});</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -394,33 +395,29 @@
   <li>这个 require 实际上是一个全局函数，用于加载模块，这里实际就是传入而已</li>
 </ul>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// 获取模块 a 的接口</span>
+	<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./a</span><span class="dl">"</span><span class="p">);</span>
+	<span class="c1">// 调用模块 a 的方法</span>
+	<span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
 
-    <span class="c1">// 获取模块 a 的接口</span>
-    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./a</span><span class="dl">'</span><span class="p">);</span>
-    <span class="c1">// 调用模块 a 的方法</span>
-    <span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
-
-    <span class="c1">// 对外提供 foo 属性</span>
-    <span class="nx">exports</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">;</span>
-    <span class="c1">// 对外提供 doSomething 方法</span>
-    <span class="nx">exports</span><span class="p">.</span><span class="nx">doSomething</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
-
+	<span class="c1">// 对外提供 foo 属性</span>
+	<span class="nx">exports</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">bar</span><span class="dl">"</span><span class="p">;</span>
+	<span class="c1">// 对外提供 doSomething 方法</span>
+	<span class="nx">exports</span><span class="p">.</span><span class="nx">doSomething</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
 <p>但是你也可以使用 AMD 风格，或者使用 return 来进行模块暴露</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">,</span> <span class="p">[</span><span class="dl">'</span><span class="s1">jquery</span><span class="dl">'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">,</span> <span class="p">[</span><span class="dl">"</span><span class="s2">jquery</span><span class="dl">"</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// 模块代码...</span>
 
-    <span class="c1">// 模块代码...</span>
-
-    <span class="c1">// 直接通过 return 暴露接口</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="na">foo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">,</span>
-        <span class="na">doSomething</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
-    <span class="p">};</span>
-
+	<span class="c1">// 直接通过 return 暴露接口</span>
+	<span class="k">return</span> <span class="p">{</span>
+		<span class="na">foo</span><span class="p">:</span> <span class="dl">"</span><span class="s2">bar</span><span class="dl">"</span><span class="p">,</span>
+		<span class="na">doSomething</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>
+	<span class="p">};</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
@@ -431,36 +428,34 @@
 <p><strong>虽然两者目前都兼容各种风格，但其底层原理并不相同，从其分别推荐的写法就可以看出两者背后原理的不同：</strong></p>
 
 <ol>
-  <li>对于依赖的模块，AMD 是<strong>提前执行</strong>，CMD 是<strong>懒执行</strong>。（都是先加载）
-    <ul>
-      <li>CMD 推崇<strong>依赖就近</strong>，AMD 推崇<strong>依赖前置</strong>。</li>
-    </ul>
-  </li>
+  <li>对于依赖的模块，AMD 是<strong>提前执行</strong>，CMD 是<strong>懒执行</strong>。（都是先加载）</li>
 </ol>
+
+<ul>
+  <li>CMD 推崇<strong>依赖就近</strong>，AMD 推崇<strong>依赖前置</strong>。</li>
+</ul>
 
 <p>看代码：</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// AMD 默认推荐</span>
 
-<span class="nx">define</span><span class="p">([</span><span class="dl">'</span><span class="s1">./a</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">./b</span><span class="dl">'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 依赖前置，提前执行</span>
+<span class="nx">define</span><span class="p">([</span><span class="dl">"</span><span class="s2">./a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">./b</span><span class="dl">"</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// 依赖前置，提前执行</span>
 
-    <span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">()</span>
-    <span class="nx">b</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">()</span>
-
-<span class="p">})</span>
-
+	<span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
+	<span class="nx">b</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
+<span class="p">});</span>
 </code></pre></div></div>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// CMD</span>
 
-<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./a</span><span class="dl">"</span><span class="p">);</span>
+	<span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
 
-    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./a</span><span class="dl">'</span><span class="p">)</span>
-    <span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">()</span>
-
-    <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./b</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// 依赖就近，延迟执行</span>
-    <span class="nx">b</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">()</span>
-<span class="p">})</span>
+	<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./b</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// 依赖就近，延迟执行</span>
+	<span class="nx">b</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
+<span class="p">});</span>
 </code></pre></div></div>
 
 <h2 id="webpack">WebPack</h2>
@@ -487,7 +482,7 @@
   Here comes Module!
 
 
-随着网站逐渐变成「互联网应用程序」，嵌入网页的 JavaScript 代码越来越庞大，... | 杨林德的博客 | Yang's Blog " >
+随着网站逐渐变成「互联网应用程序」，嵌入网页的 JavaScript 代码越来越庞大，... | 杨林德的博客 | Adrian's Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -579,7 +574,7 @@
                 <h5>FRIENDS</h5>
                 <ul class="list-inline">
                     
-                        <li><a href="http://huangxuan.me">Hux Blog</a></li>
+                        <li><a href="https://adrianyanglinde.github.io/blog">Adrian</a></li>
                     
                         <li><a href="#">Foo</a></li>
                     
@@ -693,7 +688,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Yang's Blog 2023
+                    Copyright &copy; Adrian's Blog 2023
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe

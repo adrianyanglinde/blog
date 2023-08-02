@@ -10,7 +10,7 @@
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/blog/img/favicon.ico">
 
-    <title>Example Post - 杨林德的博客 | Yang's Blog</title>
+    <title>Example Post - 杨林德的博客 | Adrian's Blog</title>
 
     <link rel="canonical" href="http://localhost:4000/blog/2015/04/14/unix-linux-note/">
 
@@ -62,7 +62,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/blog/">Yang's Blog</a>
+            <a class="navbar-brand" href="/blog/">Adrian's Blog</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -152,7 +152,7 @@
                     
                     <h2 class="subheading">不适合人类阅读，非常水的自我笔记</h2>
                     
-                    <span class="meta">Posted by Hux on April 14, 2015</span>
+                    <span class="meta">Posted by Adrian on April 14, 2015</span>
                 </div>
             </div>
         </div>
@@ -231,63 +231,34 @@
 <ul>
   <li>
     <h4 id="xenix">Xenix</h4>
+
     <p>微软 1979 年从 AT&amp;A 授权来的 Unix OS，配合着 x86 成为当时最受欢迎的 Unix 发行版。后来 M$ 和 IBM 合作开发 OS/2 操作系统后放弃，后来最终转向 <strong>Windows NT</strong>。</p>
   </li>
   <li>
     <h4 id="bsd">BSD</h4>
-    <p><strong>Barkeley Software Distribution</strong>, also called Berkeley Unix. Today the term “BSD” is used to refer to any of the BSD descendants(后代) which together form a branch of the family of Unix-like OS.(共同组成了一个分支)</p>
-    <ul>
-      <li><strong>BSD 最大的贡献是在 BSD 中率先增加了虚拟存储器和 Internet 协议</strong>，其 TCP/IP(IPv4 only) 代码仍然在现代 OS 上使用（ Microsoft Windows and most of the foundation of Apple’s OS X and iOS ）</li>
-      <li>BSD 后来发展出了众多开源后代，包括 FreeBSD, OpenBSD, NetBSD 等等……很多闭源的 vendor Unix 也都从 BSD 衍生而来。</li>
-    </ul>
+
+    <p><strong>Barkeley Software Distribution</strong>, also called Berkeley Unix. Today the term “BSD” is used to refer to any of the BSD descendants(后代) which together form a branch of the family of Unix-like OS.(共同组成了一个分支) - <strong>BSD 最大的贡献是在 BSD 中率先增加了虚拟存储器和 Internet 协议</strong>，其 TCP/IP(IPv4 only) 代码仍然在现代 OS 上使用（ Microsoft Windows and most of the foundation of Apple’s OS X and iOS ） - BSD 后来发展出了众多开源后代，包括 FreeBSD, OpenBSD, NetBSD 等等……很多闭源的 vendor Unix 也都从 BSD 衍生而来。</p>
   </li>
   <li>
     <h4 id="freebsd--apple">FreeBSD &amp; Apple</h4>
+
     <p>FreeBSD 不但是 Open Source BSD 中占有率最高的，还直接影响了 Apple Inc : NeXT Computer 的团队在 FreeBSD 上衍生出了 NeXTSTEP 操作系统，这货后来在 Apple 时期演化成了 <strong>Darwin</strong> ，这个“达尔文”居然还是个开源系统，而且是 the Core of <strong>Mac OS X</strong> and <strong>iOS</strong>.</p>
   </li>
   <li>
     <h4 id="nextstep">NeXTSTEP</h4>
-    <p>An <strong>object-oriented</strong>, multitasking OS. Low-level C but High-level OC language and runtime the first time, combined with an <strong>OO aplication layer</strong> and including several “kits”.  <br />
+
+    <p>An <strong>object-oriented</strong>, multitasking OS. Low-level C but High-level OC language and runtime the first time, combined with an <strong>OO aplication layer</strong> and including several “kits”.<br />
 大家都知道 NeXT 是 Steve Jobs 被 forced out of Apple 后和 a few of his coworkers 创办的，所以 <strong>NeXTSTEP 绝对是证明 Jobs 实力的作品。</strong></p>
   </li>
   <li>
     <h4 id="darwin">Darwin</h4>
+
     <p><a href="http://en.wikipedia.org/wiki/Darwin_(operating_system\)">Darwin</a>, the core set of components upon which Mac OS X and iOS based, mostly POSIX compatible, but has never, by itself, been certified as being compatible with any version of <strong>POSIX</strong>. (OS X, since Leopard, has been certified as compatible with the Single UNIX Specification version 3)<br />
 <strong>所以说 Mac OS X 算是很正统 Unix 的了</strong></p>
   </li>
   <li>
     <h4 id="posix">POSIX</h4>
-    <p>可移植操作系统接口, Portable Operating System Interface, is a family of standards specified by the IEEE from maintaining compatibility between OS, defines the API along with Command Line Shells and utility interfaces, for software comaptibility with variants of Unix and other OS.</p>
-    <ul>
-      <li>Fully POSIX compliant:
-        <ul>
-          <li>OS X</li>
-          <li>QNX OS (BlackBerry)</li>
-        </ul>
-      </li>
-      <li>Mostly complicant:
-        <ul>
-          <li>Linux</li>
-          <li>OpenBSD/FreeBSD</li>
-          <li>Darwin (Core of <strong>iOS</strong> &amp; OS X)</li>
-          <li><strong>Android</strong></li>
-        </ul>
-      </li>
-      <li>Complicant via compatibility feature （通过兼容功能实现兼容）
-        <ul>
-          <li>Windows NT Kernel
-            <ul>
-              <li>Windows Server 2000, 2003, 2008, 2008 R2, 2012</li>
-            </ul>
-          </li>
-          <li>Symbian OS (with PIPS)
-            <ul>
-              <li>Symbian was a closed-source OS.</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <p>可移植操作系统接口, Portable Operating System Interface, is a family of standards specified by the IEEE from maintaining compatibility between OS, defines the API along with Command Line Shells and utility interfaces, for software comaptibility with variants of Unix and other OS. - Fully POSIX compliant: - OS X - QNX OS (BlackBerry) - Mostly complicant: - Linux - OpenBSD/FreeBSD - Darwin (Core of <strong>iOS</strong> &amp; OS X) - <strong>Android</strong> - Complicant via compatibility feature （通过兼容功能实现兼容） - Windows NT Kernel - Windows Server 2000, 2003, 2008, 2008 R2, 2012 - Symbian OS (with PIPS) - Symbian was a closed-source OS.</p>
   </li>
 </ul>
 
@@ -309,14 +280,17 @@
 </ul>
 
 <h4 id="single-unix-specification">Single UNIX Specification</h4>
+
 <p>The Single UNIX Specification (SUS) is the collective name of a family of standards for computer OS, compliance with which is required to <strong>qualify for the name “Unix”</strong>, like <strong>POSIX</strong>.</p>
 
 <h4 id="apple-ios">Apple iOS</h4>
+
 <p>iOS is a <strong>Unix-like OS based on Darwin(BSD)</strong> and OS X, which share some frameworks including Core Foundation, Founadtion and the Darwin foundation with OS X, but, Unix-like shell access is not avaliable for users and restricted for apps, <strong>making iOS not fully Unix-compatible either.</strong></p>
 
 <p>The iOS kernal is <strong>XNU</strong>, the kernal of Darwin.</p>
 
 <h4 id="xnu-kernel">XNU Kernel</h4>
+
 <p>XNU, the acronym(首字母缩写) for <strong><em>X is Not Unix</em></strong>, which is the <strong>Computer OS Kernel</strong> developed at Apple Inc since Dec 1996 for use in the Mac OS X and released as free open source software as part of Darwin.</p>
 
 <hr />
@@ -412,7 +386,7 @@ Android’s source code is released by Google under open source licenses, althou
   </li>
 </ul>
 
-<p>Flash 的出现是历史性的，它不但可以作为 ROM 使用，又因其极高的读写速度和稳定性，先后发展成为U盘（USB flash drives）、移动设备主要内置存储，和虐机械硬盘几条街的固态硬盘（SSD），可以说这货基本统一了高端存储市场的技术规格。</p>
+<p>Flash 的出现是历史性的，它不但可以作为 ROM 使用，又因其极高的读写速度和稳定性，先后发展成为 U 盘（USB flash drives）、移动设备主要内置存储，和虐机械硬盘几条街的固态硬盘（SSD），可以说这货基本统一了高端存储市场的技术规格。</p>
 
 <p>所以我们平时习惯说的 ROM 其实还是来源于老单片机时代，那时的 ROM 真的是写了就很难（需要上电复位）、甚至无法修改，所以那时往 ROM 里烧下去的程序就被称作 firmware ，固件。久而久之，虽然技术发展了，固件仍然指代那些不常需要更新的软件，而 ROM 这个词也就这么沿用下来了。</p>
 
@@ -464,7 +438,7 @@ Android’s source code is released by Google under open source licenses, althou
 Catagory
 
 
- ... | 杨林德的博客 | Yang's Blog " >
+ ... | 杨林德的博客 | Adrian's Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -484,7 +458,7 @@ Catagory
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/blog/2015/01/29/hello-2015/" data-toggle="tooltip" data-placement="top" title="Welcome to Hux Blog">&larr; Previous Post</a>
+                        <a href="/blog/2015/01/29/hello-2015/" data-toggle="tooltip" data-placement="top" title="Welcome to Adrian Blog">&larr; Previous Post</a>
                     </li>
                     
                     
@@ -556,7 +530,7 @@ Catagory
                 <h5>FRIENDS</h5>
                 <ul class="list-inline">
                     
-                        <li><a href="http://huangxuan.me">Hux Blog</a></li>
+                        <li><a href="https://adrianyanglinde.github.io/blog">Adrian</a></li>
                     
                         <li><a href="#">Foo</a></li>
                     
@@ -670,7 +644,7 @@ Catagory
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Yang's Blog 2023
+                    Copyright &copy; Adrian's Blog 2023
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> |
                     <iframe
